@@ -1,22 +1,22 @@
 import React, {FC} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {AuthProvider} from './context/AuthContext';
-import Login from './views/pages/authentication/Login';
+import LoginPage from './views/pages/authentication/LoginPage';
 import ProtectedRoute from './views/components/ProtectedRoute';
-import Signup from "./views/pages/authentication/Signup";
+import SignupPage from "./views/pages/authentication/SignupPage";
 import './App.css';
-import {Home} from "./views/pages/home/Home";
+import {HomePage} from "./views/pages/home/HomePage";
 
 const App: FC = () => {
     return (<AuthProvider>
             <Routes>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
-                <Route path="/" element={<Login/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/signup" element={<SignupPage/>}/>
+                <Route path="/" element={<LoginPage/>}/>
                 <Route
                     path="/home"
                     element={<ProtectedRoute>
-                        <Home/>
+                        <HomePage/>
                     </ProtectedRoute>}
                 />
             </Routes>

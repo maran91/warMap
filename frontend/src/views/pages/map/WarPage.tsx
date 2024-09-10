@@ -1,4 +1,4 @@
-export const WarMap = () => {
+export const WarPage = () => {
     return (
         <></>
     );
