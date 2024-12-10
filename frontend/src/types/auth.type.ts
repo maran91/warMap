@@ -1,5 +1,5 @@
 export type User = {
-    id: string;
+    id: number;
     name: string;
     email: string;
 };
@@ -11,8 +11,10 @@ export type newUser = {
 };
 export type AuthContextType = {
     user: User | null;
-    login: (user: User, token: string) => void;
+    login: (user: User, token: string, userResources: userResourcesType) => void;
     logout: () => void;
+    loading: boolean;
+    userResources: userResourcesType | null;
 };
 export type AuthSignupErrorsType = {
     message?: string[];
@@ -33,6 +35,7 @@ type AuthLoginFieldErrorsType = {
     password?: string[];
 };
 export type AuthResponseType = {
+    userResources: userResourcesType;
     user: User;
     token: string;
 };
@@ -40,3 +43,8 @@ export type LoginUserType = {
     email: string;
     password: string;
 };
+export type userResourcesType = {
+        id: number;
+        resource_name : string;
+        quantity: number;
+}[];

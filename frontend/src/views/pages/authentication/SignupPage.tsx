@@ -30,6 +30,7 @@ const SignupPage: FC = () => {
             setErrors({});
         },
         onError: (error: AuthSignupErrorsType) => {
+            console.log("error", error);
             setErrors(error);
             setSuccessMessage(null);
         },

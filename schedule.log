@@ -1,0 +1,144 @@
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+no configuration file provided: not found
+Sail is not running.
+
+You may Sail using the following commands: './vendor/bin/sail up' or './vendor/bin/sail up -d'
+
+  2024-11-28 16:40:02 Running ['artisan' add:food] ............. 161.13ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:41:01 Running ['artisan' add:food] ............. 159.56ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:42:02 Running ['artisan' add:food] ............. 165.62ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:43:02 Running ['artisan' add:food] ............. 161.97ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:44:02 Running ['artisan' add:food] ............. 161.31ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:45:02 Running ['artisan' add:food] ............. 162.58ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:46:02 Running ['artisan' add:food] ............. 165.13ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:47:02 Running ['artisan' add:food] ............. 178.69ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:48:02 Running ['artisan' add:food] ............. 162.85ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:49:02 Running ['artisan' add:food] ............. 166.93ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 16:50:02 Running ['artisan' add:food] ............. 161.57ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:16:04 Running ['artisan' add:food] ............. 376.86ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:17:02 Running ['artisan' add:food] ............. 201.79ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:18:01 Running ['artisan' add:food] ............. 175.86ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:19:01 Running ['artisan' add:food] ............. 164.17ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:20:01 Running ['artisan' add:food] ............. 176.90ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:21:02 Running ['artisan' add:food] ............. 274.55ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:22:02 Running ['artisan' add:food] ............. 169.64ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:23:02 Running ['artisan' add:food] ............. 173.58ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:24:02 Running ['artisan' add:food] ............. 186.44ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:25:02 Running ['artisan' add:food] ............. 185.75ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-28 18:26:02 Running ['artisan' add:food] ............. 179.31ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-29 14:01:05 Running ['artisan' add:food] ............. 192.53ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-29 14:02:02 Running ['artisan' add:food] ............. 163.02ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+
+
+  2024-11-29 14:03:02 Running ['artisan' add:food] ............. 163.14ms DONE
+  ⇂ '/usr/bin/php8.3' 'artisan' add:food > '/dev/null' 2>&1  
+

@@ -1,10 +1,10 @@
 import { AdminLayout } from "../../layout/AdminLayout";
 
-export const HomePage = () => {
+export const RecruitmentPage = () => {
     return (
         <>
             <AdminLayout>
-                <h2>Kodu</h2>
+                <h2>Värbamis leht</h2>
             </AdminLayout>
         </>
     );

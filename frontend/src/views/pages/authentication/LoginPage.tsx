@@ -26,7 +26,7 @@ const LoginPage: FC = () => {
     const { mutate } = useMutation({
         mutationFn: (user: LoginUserType) => authenticationService.login(user),
         onSuccess: (data: AuthResponseType) => {
-            login(data.user, data.token);
+            login(data.user, data.token, data.userResources);
             setErrors({});
         },
         onError: (error: AuthLoginErrorsType) => {

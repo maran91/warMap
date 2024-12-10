@@ -3,8 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -14,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -40,7 +42,9 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property-read Collection<int, \App\Models\UserResources> $userResource
+ * @property-read int|null $user_resource_count
+ * @mixin Eloquent
  */
 class User extends Authenticatable
 {
@@ -88,4 +92,10 @@ class User extends Authenticatable
 
         return parent::__get($key);
     }
+    public function userResource(): HasMany
+    {
+        return $this->hasMany(UserResources::class,'user_id');
+
+    }
+
 }
