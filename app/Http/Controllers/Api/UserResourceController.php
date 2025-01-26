@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ResourceType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserResourcesRequest;
 use App\Http\Requests\UpdateUserResourcesRequest;
-use App\Models\UserResources;
+use App\Models\UserResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,18 +14,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class UserResourcesController extends Controller
+class UserResourceController extends Controller
 {
     /**
      * @throws Throwable
      */
     public function updateTerritory(Request $request): JsonResponse|array
     {
-        $territoryResourceType = 2;
-        $interval = 300;
-        $record = UserResources::where('user_id', Auth::id())->where(
-            'resources_types_id',
-            $territoryResourceType
+        $result = DB::transaction(function () use ($request) {
+            $interval = 300;
+
+            $record = UserResource::lockForUpdate()->where('user_id', Auth::id())->where(
+            'resource_type_id',
+            ResourceType::TERRITORY
         )->first();
 
         $timeDifference = now()->diffInSeconds($record->updated_at, true);
@@ -37,26 +39,17 @@ class UserResourcesController extends Controller
                 'message' => 'You can only update your territory every 5 minutes',
             ], 203);
         }
-        try {
-            DB::beginTransaction();
             $record->increment('quantity');
             $record->touch('updated_at');
-            DB::commit();
 
-            return response()->json([
+            return [
                 'last_updated' => $record->updated_at,
                 'time_left' => intval($interval - $timeDifference),
                 'quantity' => $record->quantity,
                 'message' => 'Territory updated successfully',
-            ]);
-        } catch (Throwable $e) {
-            DB::rollBack();
-
-            report($e);
-            return response()->json([
-                'message' => 'Error: ' . $e->getMessage(),
-            ], 500);
-        }
+            ];
+        });
+        return response()->json($result);
     }
 
     /**
@@ -64,7 +57,7 @@ class UserResourcesController extends Controller
      */
     public function index(): Collection
     {
-        return UserResources::all();
+        return UserResource::all();
     }
 
     /**
@@ -86,7 +79,7 @@ class UserResourcesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserResources $userResources)
+    public function show(UserResource $userResources)
     {
         //
     }
@@ -94,14 +87,14 @@ class UserResourcesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserResources $userResources)
+    public function edit(UserResource $userResources)
     {
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserResourcesRequest $request, UserResources $userResources)
+    public function update(UpdateUserResourcesRequest $request, UserResource $userResources)
     {
         //
     }
@@ -109,7 +102,7 @@ class UserResourcesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserResources $userResources)
+    public function destroy(UserResource $userResources)
     {
         //
     }

@@ -4,9 +4,10 @@ namespace App\Console\Commands;
 
 use DB;
 use Illuminate\Console\Command;
+use App\Enums\ResourceType;
 use Throwable;
 
-class AddUserResources extends Command
+class UpdateUserResources extends Command
 {
     /**
      * @throws Throwable
@@ -17,7 +18,7 @@ class AddUserResources extends Command
      *
      * @var string
      */
-    protected $signature = 'add:food {--dry-run : Simulate the process without making changes}';
+    protected $signature = 'update:food {--dry-run : Simulate the process without making changes}';
 
     /**
      * The console command description.
@@ -31,19 +32,16 @@ class AddUserResources extends Command
      */
     public function handle(): int
     {
-        $foodResourceType = 1;
-        $territoryResourceType = 2;
+
         try {
-            $groupedUsers = DB::table('user_resources')->select('user_id', 'resources_types_id', 'quantity')->orderBy(
+            $groupedUsers = DB::table('user_resources')->select('user_id', 'resource_type_id', 'quantity')->orderBy(
                 'user_id'
             )->get()->groupBy('user_id');
-
-            $this->info('Processing user resources... Grouping users by id');
 
             DB::beginTransaction();
 
             foreach ($groupedUsers as $userId => $userResources) {
-                $territoryResource = $userResources->firstWhere('resources_types_id', $territoryResourceType);
+                $territoryResource = $userResources->firstWhere('resource_type_id', ResourceType::TERRITORY);
                 if ($territoryResource) {
                     $amountToIncrement = $territoryResource->quantity * 5;
 
@@ -53,8 +51,8 @@ class AddUserResources extends Command
                     }
 
                     DB::table('user_resources')->where('user_id', $userId)->where(
-                        'resources_types_id',
-                        $foodResourceType
+                        'resource_type_id',
+                        ResourceType::FOOD
                     )->increment(
                         'quantity',
                         $amountToIncrement

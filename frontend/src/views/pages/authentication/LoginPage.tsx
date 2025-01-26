@@ -10,9 +10,11 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { authenticationService } from "../../../api/authentication/authentication.service";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useUserResources } from "../../../context/UserResourcesContext";
 
 const LoginPage: FC = () => {
     const { login } = useAuth();
+    const { addOrUpdateUserResources } = useUserResources();
     const navigate = useNavigate();
     const location = useLocation();
     const [message, setMessage] = useState<string | null>(
@@ -26,7 +28,9 @@ const LoginPage: FC = () => {
     const { mutate } = useMutation({
         mutationFn: (user: LoginUserType) => authenticationService.login(user),
         onSuccess: (data: AuthResponseType) => {
-            login(data.user, data.token, data.userResources);
+            login(data.user, data.token);
+            addOrUpdateUserResources(data.userInfo);
+            navigate("/home");
             setErrors({});
         },
         onError: (error: AuthLoginErrorsType) => {

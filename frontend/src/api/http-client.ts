@@ -1,17 +1,30 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
+
 export const httpCommon = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
     headers: {
         "Content-type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
     },
 });
 
+httpCommon.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("authToken");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        } else {
+            delete config.headers.Authorization;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    },
+);
 httpCommon.interceptors.response.use(
     (response) => {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
+
         return response;
     },
     (error) => {
@@ -22,9 +35,9 @@ httpCommon.interceptors.response.use(
         switch (error.response.status) {
             case 401:
                 console.log("Unauthenticated. Redirecting to login.");
-                // Clear the token and redirect to login
                 localStorage.removeItem("token");
                 window.location.href = "/login"; // Adjust the route as needed
+                break;
             case 500:
                 console.log("500 error", error.response.data.message);
                 return Promise.reject({
@@ -32,10 +45,12 @@ httpCommon.interceptors.response.use(
                     code: "500",
                 });
             default:
-                //default to error 400 Bad Request
                 if (error.response.data && error.response.data.message) {
                     message = error.response.data;
-                    console.log("error.response.data.errors", error.response.data);
+                    console.log(
+                        "error.response.data.errors",
+                        error.response.data,
+                    );
                 }
                 return Promise.reject(message);
         }

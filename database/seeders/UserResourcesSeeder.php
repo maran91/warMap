@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserResources;
+use App\Models\UserResource;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +13,7 @@ class UserResourcesSeeder extends Seeder
      */
     public function run(): void
     {
-        UserResources::factory()->count(10)->create();
+       // UserResource::factory()->count(10)->create();
 
     }
 }

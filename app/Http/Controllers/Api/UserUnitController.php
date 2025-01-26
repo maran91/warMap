@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreResourcesTypesRequest;
-use App\Http\Requests\UpdateResourcesTypesRequest;
-use App\Models\ResourcesTypes;
+use App\Http\Requests\Storeuser_soldiersRequest;
+use App\Http\Requests\Updateuser_soldiersRequest;
+use App\Models\UserUnit;
 
-class ResourcesTypesController extends Controller
+class UserUnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class ResourcesTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreResourcesTypesRequest $request)
+    public function store(Storeuser_soldiersRequest $request)
     {
         //
     }
@@ -36,7 +36,7 @@ class ResourcesTypesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ResourcesTypes $resourcesTypes)
+    public function show(UserUnit $user_soldiers)
     {
         //
     }
@@ -44,7 +44,7 @@ class ResourcesTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ResourcesTypes $resourcesTypes)
+    public function edit(UserUnit $user_soldiers)
     {
         //
     }
@@ -52,7 +52,7 @@ class ResourcesTypesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateResourcesTypesRequest $request, ResourcesTypes $resourcesTypes)
+    public function update(Updateuser_soldiersRequest $request, UserUnit $user_soldiers)
     {
         //
     }
@@ -60,7 +60,7 @@ class ResourcesTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ResourcesTypes $resourcesTypes)
+    public function destroy(UserUnit $user_soldiers)
     {
         //
     }

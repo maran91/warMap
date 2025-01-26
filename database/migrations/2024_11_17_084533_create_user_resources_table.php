@@ -12,10 +12,13 @@ return new class extends Migration {
     {
         Schema::create('user_resources', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('resources_types_id')->constrained()->cascadeOnDelete();
-            $table->bigInteger('quantity');
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained();
+            $table->bigInteger('resource_type_id')->unsigned()->nullable();
+            $table->bigInteger('quantity')->unsigned();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+
+            $table->foreign('resource_type_id')->references('id')->on('resource_types');
         });
     }
 
@@ -24,15 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('user_resources', function (Blueprint $table) {
-            $table->dropForeign(['user_id']); // Drop the foreign key constraint for 'user_id'
-            $table->dropForeign(['resource_id']); // Drop the foreign key constraint for 'resource_id'
-        });
         Schema::dropIfExists('user_resources');
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
     }
-
-
 };

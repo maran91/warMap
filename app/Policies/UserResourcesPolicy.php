@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\UserResources;
+use App\Models\UserResource;
 use Illuminate\Auth\Access\Response;
 
 class UserResourcesPolicy
@@ -19,7 +19,7 @@ class UserResourcesPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, UserResources $userResources): bool
+    public function view(User $user, UserResource $userResources): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class UserResourcesPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, UserResources $userResources): bool
+    public function update(User $user, UserResource $userResources): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class UserResourcesPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, UserResources $userResources): bool
+    public function delete(User $user, UserResource $userResources): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class UserResourcesPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, UserResources $userResources): bool
+    public function restore(User $user, UserResource $userResources): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class UserResourcesPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, UserResources $userResources): bool
+    public function forceDelete(User $user, UserResource $userResources): bool
     {
         //
     }

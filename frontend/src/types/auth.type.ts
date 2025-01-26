@@ -1,3 +1,5 @@
+import {UserResources} from "./userResources.type";
+
 export type User = {
     id: number;
     name: string;
@@ -11,16 +13,14 @@ export type newUser = {
 };
 export type AuthContextType = {
     user: User | null;
-    login: (user: User, token: string, userResources: userResourcesType) => void;
+    login: (user: User, token: string) => void;
     logout: () => void;
-    loading: boolean;
-    userResources: userResourcesType | null;
 };
 export type AuthSignupErrorsType = {
     message?: string[];
     errors?: AuthSignupFieldErrorsType;
 };
-type AuthSignupFieldErrorsType = {
+export type AuthSignupFieldErrorsType = {
     name?: string[];
     email?: string[];
     password?: string[];
@@ -35,7 +35,7 @@ type AuthLoginFieldErrorsType = {
     password?: string[];
 };
 export type AuthResponseType = {
-    userResources: userResourcesType;
+    userInfo: UserResourcesType;
     user: User;
     token: string;
 };
@@ -43,8 +43,18 @@ export type LoginUserType = {
     email: string;
     password: string;
 };
-export type userResourcesType = {
-        id: number;
-        resource_name : string;
-        quantity: number;
+export type ResourcesType = {
+    id: number;
+    resource_name : string;
+    quantity: number;
+}[];
+export type UserResourcesType = {
+    resources: ResourcesType;
+    units: UnitsType;
+
+};
+export type UnitsType = {
+    id: number;
+    unit_name: string;
+    quantity: number;
 }[];

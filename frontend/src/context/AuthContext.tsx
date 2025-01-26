@@ -6,8 +6,7 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import {AuthContextType, User, userResourcesType} from "../types/auth.type";
-import { useNavigate } from "react-router-dom";
+import { AuthContextType, User } from "../types/auth.type";
 
 export const AuthContext = createContext<AuthContextType | undefined>(
     undefined,
@@ -19,34 +18,23 @@ interface AuthProviderProps {
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
-    const [userResources, setUserResources] = useState<userResourcesType | null>(null);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         const userFromLocalStorage = localStorage.getItem("user");
-        const userResourcesString = localStorage.getItem("userResources");
-
         if (token && userFromLocalStorage) {
             const user: User = JSON.parse(userFromLocalStorage);
-            const userResources: userResourcesType = userResourcesString ? JSON.parse(userResourcesString) : null;
             setUser(user);
-            setUserResources(userResources);
         }
-        setLoading(false);
+
+        setIsLoading(false);
     }, []);
-    const login = (user: User, token: string, userResources: userResourcesType) => {
-        // Mock login logic
+
+    const login = (user: User, token: string) => {
         setUser(user);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("authToken", token);
-        localStorage.setItem("userResources", JSON.stringify(userResources));
-        console.log("User logged in");
-        console.log("Token:", token);
-        console.log("User:", user);
-        console.log("User Resources:", userResources);
-        navigate("/home");
     };
 
     const logout = () => {
@@ -56,7 +44,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, loading, userResources }}>
+        <AuthContext.Provider value={{ user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

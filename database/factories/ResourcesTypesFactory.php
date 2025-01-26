@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\ResourcesTypes;
+use App\Models\ResourceType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<ResourcesTypes>
+ * @extends Factory<ResourceType>
  */
 class ResourcesTypesFactory extends Factory
 {

@@ -16,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -42,8 +42,10 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @property-read Collection<int, \App\Models\UserResources> $userResource
+ * @property-read Collection<int, UserResource> $userResource
  * @property-read int|null $user_resource_count
+ * @property-read Collection<int, UserUnit> $userUnits
+ * @property-read int|null $user_units_count
  * @mixin Eloquent
  */
 class User extends Authenticatable
@@ -84,18 +86,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function __get($key)
-    {
-        if (array_key_exists($key, $this->attributes)) {
-            return $this->attributes[$key];
-        }
 
-        return parent::__get($key);
+    public function UserResources(): HasMany
+    {
+        return $this->hasMany(UserResource::class,'user_id');
+
     }
-    public function userResource(): HasMany
+    public function UserUnits(): HasMany
     {
-        return $this->hasMany(UserResources::class,'user_id');
-
+        return $this->hasMany(UserUnit::class,'user_id');
     }
 
 }
