@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Database\Factories\UnitTypesFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -18,19 +18,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|UnitType newModelQuery()
  * @method static Builder|UnitType newQuery()
  * @method static Builder|UnitType query()
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class UnitType extends Model
 {
     protected $fillable = [
-        'unit_type',
-        'description',
-        'attack',
-        'defense',
-        'health',
+
     ];
 
-    public function UserUnits(): HasMany
+    public function userUnit(): HasMany
     {
         return $this->hasMany(UserUnit::class, 'unit_type_id');
     }

@@ -33,11 +33,11 @@ class UserUnit extends Model
         'quantity',
     ];
 
-    public function UnitTypes(): BelongsTo
+    public function unitTypes(): BelongsTo
     {
         return $this->belongsTo(UnitType::class, 'unit_type_id');
     }
-    public function User(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

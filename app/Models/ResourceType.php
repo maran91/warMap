@@ -34,11 +34,10 @@ class ResourceType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
+
     ];
 
-    public function userResources(): HasMany
+    public function userResource(): HasMany
     {
         return $this->hasMany(UserResource::class, 'resource_type_id');
     }

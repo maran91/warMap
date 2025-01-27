@@ -6,7 +6,9 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -87,14 +89,21 @@ class User extends Authenticatable
         ];
     }
 
-    public function UserResources(): HasMany
+    public function userResources(): HasMany
     {
         return $this->hasMany(UserResource::class,'user_id');
 
     }
-    public function UserUnits(): HasMany
+    public function userUnits(): HasMany
     {
         return $this->hasMany(UserUnit::class,'user_id');
     }
+    public function userProfile(): HasOne
+    {
+        return $this->hasOne(UserProfile::class,'user_id');
+    }
+
+
+
 
 }

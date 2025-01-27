@@ -38,16 +38,16 @@ class UserResource extends Model
     use HasFactory;
 
     protected $fillable = [
-        'resource_type_id', 'quantity',
+        'resource_type_id', 'quantity','user_id'
     ];
-    protected $guarded = ['user_id'];
+  //  protected $guarded = ['user_id'];
 
-    public function User(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function ResourcesTypes(): BelongsTo
+    public function resourcesType(): BelongsTo
     {
         return $this->belongsTo(ResourceType::class, 'resource_type_id');
     }

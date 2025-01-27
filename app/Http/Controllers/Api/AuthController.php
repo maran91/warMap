@@ -60,7 +60,6 @@ class AuthController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ]);
-
             UserUnit::create([
                 'user_id' => $user->id,
                 'unit_type_id' => UnitType::SOLDIER,
