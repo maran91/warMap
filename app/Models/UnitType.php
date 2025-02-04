@@ -26,7 +26,7 @@ class UnitType extends Model
 
     ];
 
-    public function userUnit(): HasMany
+    public function userUnits(): HasMany
     {
         return $this->hasMany(UserUnit::class, 'unit_type_id');
     }

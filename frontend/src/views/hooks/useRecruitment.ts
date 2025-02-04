@@ -15,7 +15,7 @@ export const useRecruitment = () => {
         mutationFn: async (amount: number) => {
             setError(null);
             setSuccess(null);
-            return recruitmentService.RecruitChild(amount);
+            return recruitmentService.RecruitSoldier(amount);
         },
         onSuccess: (data) => {
             setSuccess("Recruitment successful");

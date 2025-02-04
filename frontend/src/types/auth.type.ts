@@ -1,11 +1,9 @@
-import {UserResources} from "./userResources.type";
-
 export type User = {
     id: number;
     name: string;
     email: string;
 };
-export type newUser = {
+export type NewUser = {
     name: string;
     email: string;
     password: string;
@@ -23,6 +21,8 @@ export type AuthSignupErrorsType = {
 export type AuthSignupFieldErrorsType = {
     name?: string[];
     email?: string[];
+    username?: string[];
+    color?: string[];
     password?: string[];
     password_confirmation?: string[];
 };
@@ -45,16 +45,25 @@ export type LoginUserType = {
 };
 export type ResourcesType = {
     id: number;
-    resource_name : string;
+    resource_name: string;
     quantity: number;
 }[];
 export type UserResourcesType = {
     resources: ResourcesType;
     units: UnitsType;
-
 };
 export type UnitsType = {
     id: number;
     unit_name: string;
     quantity: number;
 }[];
+export type UpdateProfileType = {
+    name?: string;
+    email?: string;
+    username?: string;
+};
+export type UpdatePasswordType = {
+    current_password: string;
+    new_password: string;
+    new_password_confirmation: string;
+};

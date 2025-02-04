@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserUnit extends Model
 {
     use HasFactory;
+
     /**
      * @method static Builder|UserUnit create(array $attributes = [])
      */
@@ -33,10 +34,11 @@ class UserUnit extends Model
         'quantity',
     ];
 
-    public function unitTypes(): BelongsTo
+    public function unitType(): BelongsTo
     {
         return $this->belongsTo(UnitType::class, 'unit_type_id');
     }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

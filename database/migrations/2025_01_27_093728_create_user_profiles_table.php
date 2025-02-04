@@ -10,9 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('userProfile', function (Blueprint $table) {
+        Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->constraint();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('username')->unique();
             $table->enum(
                 'color',
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('userProfile');
+        Schema::dropIfExists('user_profiles');
     }
 };

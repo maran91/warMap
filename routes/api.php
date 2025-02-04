@@ -16,6 +16,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/territories/acquire', [UserResourceController::class, 'updateTerritory'])->name('resources.updateTerritory');
     Route::post('/recruit/soldier', [SoldierController::class, 'reqruitSoldier'])->name('buy');
+    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('updateProfile');
+    Route::put('/profile/password', [AuthController::class, 'updatePassword'])->name('updatePassword');
 });
 
 /*

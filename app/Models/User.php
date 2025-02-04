@@ -6,7 +6,6 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,6 +75,21 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function resources(): HasMany
+    {
+        return $this->hasMany(UserResource::class, 'user_id');
+    }
+
+    public function units(): HasMany
+    {
+        return $this->hasMany(UserUnit::class, 'user_id');
+    }
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(UserProfile::class, 'user_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -88,22 +102,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    public function userResources(): HasMany
-    {
-        return $this->hasMany(UserResource::class,'user_id');
-
-    }
-    public function userUnits(): HasMany
-    {
-        return $this->hasMany(UserUnit::class,'user_id');
-    }
-    public function userProfile(): HasOne
-    {
-        return $this->hasOne(UserProfile::class,'user_id');
-    }
-
-
 
 
 }

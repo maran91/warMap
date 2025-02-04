@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('mapLocations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique()->nullable();
-            $table->number('address');
+            $table->integer('address');
             $table->string('owner')->nullable();
             $table->integer('soldier_count')->nullable()->unsigned();
             $table->timestamp('created_at')->useCurrent();

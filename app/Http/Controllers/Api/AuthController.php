@@ -7,17 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
+use App\Models\UserProfile;
 use App\Models\UserResource;
 use App\Models\UserUnit;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Throwable;
+
 
 class AuthController extends Controller
 {
@@ -60,11 +64,15 @@ class AuthController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ]);
+            UserProfile::create([
+                'user_id' => $user->id,
+                'username' => $data['username'],
+                'color' => $data['color'],
+            ]);
             UserUnit::create([
                 'user_id' => $user->id,
                 'unit_type_id' => UnitType::SOLDIER,
                 'quantity' => 1,
-
             ]);
             $resources = DB::table('resource_types')->get();
             foreach ($resources as $resource) {
@@ -93,5 +101,42 @@ class AuthController extends Controller
         $user = $request->user();
         $user->currentAccessToken()->delete();
         return response(['message' => 'Logged out'], 204);
+    }
+
+    public function updateProfile(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $validated_data = $request->validate([
+            'name' => 'sometimes|string|max:55',
+            'email' => 'sometimes|email|unique:users,email',
+            'username' => 'sometimes|string|unique:user_profiles,username|max:10',
+        ]);
+        return DB::transaction(function () use ($user, $validated_data) {
+            $user->update(array_filter($validated_data, function ($key) {
+                return in_array($key, ['name', 'email']);
+            }, ARRAY_FILTER_USE_KEY));
+
+            $user->profile->update(array_filter($validated_data, function ($key) {
+                return in_array($key, ['username', 'color']);
+            }, ARRAY_FILTER_USE_KEY));
+            return response()->json(['message' => 'User profile updated successfully.'], 200);
+        });
+    }
+
+    public function updatePassword(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|confirmed',
+
+
+        ]);
+        $user = request()->user();
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return response()->json(['message' => 'Current password is incorrect.'], 401);
+        }
+        $user->update(['password' => Hash::make($validated['new_password'])]);
+        return response()->json(['message' => 'Password updated successfully.'], 200);
     }
 }

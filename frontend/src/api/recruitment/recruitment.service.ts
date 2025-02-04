@@ -7,5 +7,5 @@ const RecruitSoldier = async (amount: number) => {
 };
 
 export const recruitmentService = {
-    RecruitChild: RecruitSoldier,
+    RecruitSoldier,
 };

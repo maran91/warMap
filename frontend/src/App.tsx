@@ -10,7 +10,7 @@ import { RecruitmentPage } from "./views/pages/recruitment/RecruitmentPage";
 import { CrewPage } from "./views/pages/crew/CrewPage";
 import { ProfilePage } from "./views/pages/profile/ProfilePage";
 import { AppProviders } from "./context/AppProviders";
-import ProtectedRoute from "./views/components/protected route/ProtectedRoute";
+import ProtectedRoute from "./views/components/ProtectedRoute/ProtectedRoute";
 
 const App: FC = () => {
     return (
