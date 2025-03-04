@@ -1,13 +1,13 @@
 import { InputText } from "primereact/inputtext";
 import React, { ChangeEvent } from "react";
-import { AuthSignupErrorsType } from "../../../types/auth.type";
+import { SignupResponseError } from "../../../types/auth.type";
 
 interface Props {
     password: string;
     passwordConfirmation: string;
     setPassword: (newPassword: string) => void;
     setPasswordConfirmation: (newPassword: string) => void;
-    errors: AuthSignupErrorsType;
+    errors: SignupResponseError;
 }
 
 export const PasswordInput: React.FC<Props> = ({

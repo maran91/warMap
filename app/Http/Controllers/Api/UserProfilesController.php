@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\MapLocations;
+use App\Http\Controllers\Controller;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
-class MapLocationsController extends Controller
+class UserProfilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class MapLocationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MapLocations $map_locations)
+    public function show(UserProfile $user_profiles)
     {
         //
     }
@@ -42,7 +43,7 @@ class MapLocationsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MapLocations $map_locations)
+    public function edit(UserProfile $user_profiles)
     {
         //
     }
@@ -50,7 +51,7 @@ class MapLocationsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MapLocations $map_locations)
+    public function update(Request $request, UserProfile $user_profiles)
     {
         //
     }
@@ -58,7 +59,7 @@ class MapLocationsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MapLocations $map_locations)
+    public function destroy(UserProfile $user_profiles)
     {
         //
     }

@@ -5,26 +5,30 @@ export const DiscoverPage: React.FC = () => {
     const { handleDiscovery, sucsess, timeLeft, error } = useDiscover();
     return (
         <>
-            <h2 className="text-2xl font-bold"></h2>
-            <h2 className="text-2xl font-bold"></h2>
-            <div className="flex flex-col items-center h-full">
-                <h1 className="text-4xl font-bold">Discover</h1>
-                <p className="text-lg text-gray-500">
+            <div className="flex flex-wrap gap-5 flex-col items-center h-full">
+                <h1 className="text-center text-3xl mt-20 mb-6 text-light-gray font-bold">
+                    Discover
+                </h1>
+                <p className="text-xl text-white m-50">
                     Embark on a mission to explore and clear the surrounding map
-                    of foreign fighters. Each square mile of cleared land will
-                    generate 35 food to sustain your group.
+                    of foreign fighters.<br></br> Each square mile of cleared
+                    land will generate 35 food to sustain your group.
                 </p>
-                <p className="text-lg"> land cleared:</p>
                 <div className="flex flex-col space-x-4 items-center">
                     <button
-                        className="bg-gray-800 text-white px-4 justify-center py-2 rounded-lg"
+                        className="m-3 p-button bg-dark-red-orange text-white rounded-md shadow-md hover:bg-olive-green hover:scale-105 font-bold py-2 px-4 text-center"
                         onClick={handleDiscovery}
                     >
                         Discover and clear
                     </button>
-                    <p>{sucsess}</p>
-                    <p>{Math.floor(timeLeft / 60)} minutes left</p>
-                    <p>{timeLeft % 60} second left</p>
+                    <p className="text-white">{sucsess}</p>
+                    <p className="text-light-gray">
+                        <p className="text-light-gray">
+                            {timeLeft === 0
+                                ? "Ready to Disccover."
+                                : `${Math.floor(timeLeft / 60)} minutes ${timeLeft % 60} second left.`}
+                        </p>
+                    </p>
                 </div>
             </div>
         </>

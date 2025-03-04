@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from "react";
-import { AuthSignupErrorsType } from "../../../types/auth.type";
+import { SignupResponseError } from "../../../types/auth.type";
 import { InputText } from "primereact/inputtext";
 
 interface Props {
     currentPassword: string;
     setCurrentPassword: (currentPassword: string) => void;
-    errors: AuthSignupErrorsType;
+    errors: SignupResponseError;
 }
 
 export const CurrentPasswordInput: React.FC<Props> = ({

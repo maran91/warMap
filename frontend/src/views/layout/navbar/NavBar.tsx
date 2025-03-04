@@ -16,22 +16,23 @@ export const NavBar: React.FC<NavBarProps> = ({ className }) => {
 
     const items: NavItem[] = [
         {
-            label: "Majandus",
+            label: "Economy",
             subItems: [
-                { label: "Avasta", path: "/majandus/avasta" },
-                { label: "Kogukonna leht", path: "/majandus/kamp" },
+                { label: "Discover", path: "/economy/discover" },
+                { label: "Crew", path: "/economy/crew" },
             ],
         },
         {
-            label: "Sõjandus",
+            label: "Warfare",
             subItems: [
-                { label: "Värbamine", path: "/sojandus/varbamine" },
-                { label: "Kaart", path: "/sojandus/kaart" },
+                { label: "Recruitment", path: "/warfare/Recruitment" },
+                { label: "Map", path: "/warfare/map" },
+                { label: "Provinces", path: "/warfare/provinces" },
             ],
         },
         {
             label: "Seaded",
-            subItems: [{ label: "Profiil", path: "/seaded/profiil" }],
+            subItems: [{ label: "Profile", path: "/settings/profile" }],
         },
     ];
 
@@ -43,7 +44,7 @@ export const NavBar: React.FC<NavBarProps> = ({ className }) => {
 
     return (
         <div className={`w-full h-full ${className}`}>
-            <nav className="bg-gray-800 p-4 text-white ">
+            <nav className="bg-charcoal-black p-4 text-white ">
                 <ul className="space-y-4">
                     {items.map((item) => (
                         <li key={item.label} className="relative">
@@ -51,14 +52,14 @@ export const NavBar: React.FC<NavBarProps> = ({ className }) => {
                                 {item.label}
                             </div>
                             {item.subItems && (
-                                <ul className="bg-gray-800 mt-2 font-bold rounded-md shadow-lg space-y-2 p-2">
+                                <ul className="bg-charcoal-black mt-2 font-bold rounded-md space-y-2 p-2">
                                     {item.subItems.map((subItem) => (
                                         <li key={subItem.label}>
                                             <button
                                                 onClick={() =>
                                                     handleItemClick(subItem)
                                                 }
-                                                className="w-full px-4 text-gray-400 py-2 text-center hover:text-white hover:bg-gray-600 hover:border-white border-4 rounded-full border-gray-500"
+                                                className=" shadow-lg w-full px-4 text-light-gray py-2 text-center hover:text-white hover:bg-muted-gold hover:border-white border-4 rounded-full border-steel-gray"
                                             >
                                                 {subItem.label}
                                             </button>

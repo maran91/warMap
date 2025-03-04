@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->bigInteger('quantity')->unsigned();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
-
             $table->foreign('resource_type_id')->references('id')->on('resource_types');
         });
     }

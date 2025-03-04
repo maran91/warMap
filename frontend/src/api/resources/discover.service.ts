@@ -3,7 +3,9 @@ import { httpCommon } from "../http-client";
 
 const discoverLand = async () => {
     const response = await httpCommon.post(DISCOVER_ROUTE);
-    return response.data;
+    console.log("response", response);
+
+    return response.data.original;
 };
 export const discoverService = {
     discoverLand,

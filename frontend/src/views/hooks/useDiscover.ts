@@ -1,10 +1,10 @@
-import {useUserResources} from "../../context/UserResourcesContext";
-import React, {useState} from "react";
-import {useMutation} from "@tanstack/react-query";
-import {discoverService} from "../../api/resources/discover.service";
-import {Resource} from "../../types/userResources.type";
+import { useUserResources } from "../../context/UserResourcesContext";
+import React, { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { discoverService } from "../../api/resources/discover.service";
+import { Resource } from "../../types/userResources.type";
 
-export const useDiscover =() =>{
+export const useDiscover = () => {
     const { userResources, addOrUpdateUserResources } = useUserResources();
     const [error, setError] = useState<string | null>(null);
     const [sucsess, setSucsess] = useState<string | null>(null);
@@ -17,13 +17,14 @@ export const useDiscover =() =>{
             return discoverService.discoverLand();
         },
         onSuccess: (data) => {
-
-            setSucsess(data.original.message);
-            setTimeLeft(data.original.time_left);
+            console.log("data", data);
+            setSucsess(data.message);
+            setTimeLeft(data.time_left);
+            localStorage.setItem("timeLeft", JSON.stringify(data.time_left));
 
             const updateResources = resources.map((resource: Resource) => {
                 if (resource.resource_name.toLowerCase() === "territory") {
-                    return { ...resource, quantity: data.origina.quantity };
+                    return { ...resource, quantity: data.quantity };
                 }
                 return resource;
             });
@@ -37,10 +38,14 @@ export const useDiscover =() =>{
             setError(error.message);
         },
     });
-    const [timeLeft, setTimeLeft] = React.useState<number>(0);
+    const storedTimeLeftString = localStorage.getItem("timeLeft");
+    const initialTimeLeft =
+        storedTimeLeftString === null ? 0 : JSON.parse(storedTimeLeftString);
+
+    const [timeLeft, setTimeLeft] = React.useState<number>(initialTimeLeft);
 
     const handleDiscovery = async () => {
         discoveryMutation.mutate();
     };
-    return {error,sucsess,handleDiscovery,timeLeft };
-}
+    return { error, sucsess, handleDiscovery, timeLeft };
+};

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { ColorOption } from "../../types/ColorOption.type";
-import { AuthSignupErrorsType, NewUser } from "../../types/auth.type";
+import { ColorOption } from "../../types/colorOption.type";
+import { NewUser, SignupResponseError } from "../../types/auth.type";
 import { useMutation } from "@tanstack/react-query";
 import { authenticationService } from "../../api/authentication/authentication.service";
 
@@ -18,7 +18,7 @@ export const useSignup = () => {
 
     // Valitation state
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
-    const [errors, setErrors] = useState<AuthSignupErrorsType>({});
+    const [errors, setErrors] = useState<SignupResponseError>({});
     const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
 
     // API mutation
@@ -34,7 +34,7 @@ export const useSignup = () => {
             });
             setErrors({});
         },
-        onError: (error: AuthSignupErrorsType) => {
+        onError: (error: SignupResponseError) => {
             setErrors(error);
             setSuccessMessage(null);
         },

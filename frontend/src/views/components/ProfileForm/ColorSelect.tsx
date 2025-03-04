@@ -1,12 +1,12 @@
 import React from "react";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import {ColorOption} from "../../../types/ColorOption.type";
-import {AuthSignupErrorsType} from "../../../types/auth.type";
+import { ColorOption } from "../../../types/colorOption.type";
+import { SignupResponseError } from "../../../types/auth.type";
 
 interface Props {
     color: ColorOption | null;
     setColor: React.Dispatch<React.SetStateAction<ColorOption | null>>;
-    errors: AuthSignupErrorsType;
+    errors: SignupResponseError;
 }
 
 export const ColorSelect: React.FC<Props> = ({ color, setColor, errors }) => {
@@ -32,25 +32,26 @@ export const ColorSelect: React.FC<Props> = ({ color, setColor, errors }) => {
     };
 
     return (
-        <div className="w-full max-w-sm mx-auto">
+        <div className="">
             <Dropdown
                 value={color}
                 onChange={handleChange}
                 options={colors}
                 optionLabel="label"
                 placeholder="Select a color"
-                className={`w-full ${
+                className={`w-full bg-olive-green ${
                     errors.errors?.color
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 }`}
                 pt={{
                     root: {
-                        className: "w-full px-4 py-2 mb-3 mr-3 rounded-lg shadow-md transition-all"
+                        className:
+                            "w-full px-4 py-2 mb-3 mr-3 rounded-lg shadow-md transition-all",
                     },
                     panel: {
-                        className: "rounded-lg bg-white shadow-lg"
-                    }
+                        className: "rounded-lg bg-white shadow-lg",
+                    },
                 }}
             />
             {errors.errors?.color && (

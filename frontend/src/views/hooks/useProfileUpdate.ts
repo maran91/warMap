@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { AuthSignupErrorsType, UpdateProfileType } from "../../types/auth.type";
-import { ColorOption } from "../../types/ColorOption.type";
+import { SignupResponseError, UpdateProfileType } from "../../types/auth.type";
+import { ColorOption } from "../../types/colorOption.type";
 import { useMutation } from "@tanstack/react-query";
 import { profileService } from "../../api/profile/profile.service";
 
 export const useProfileUpdate = () => {
     // Validation state
     const [profileUpdateErrors, setProfileUpdateErrors] =
-        useState<AuthSignupErrorsType>({});
+        useState<SignupResponseError>({});
     const [profileUpdateSuccessMessage, setProfileUpdateSuccessMessage] =
         useState<string | null>(null);
     const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
@@ -30,7 +30,7 @@ export const useProfileUpdate = () => {
             setUsername("");
             setColor(null);
         },
-        onError: (error: AuthSignupErrorsType) => {
+        onError: (error: SignupResponseError) => {
             setProfileUpdateErrors(error);
             setProfileUpdateSuccessMessage(null);
         },

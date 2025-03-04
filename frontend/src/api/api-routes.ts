@@ -5,3 +5,7 @@ export const DISCOVER_ROUTE = "api/territories/acquire";
 export const RECRUITMENT_ROUTE = "api/recruit/soldier";
 export const UPDATE_PROFILE = "api/profile";
 export const UPDATE_PASSWORD = "api/profile/password";
+export const MAP = "api/map";
+export const OWNED_LOCATIONS = "api/map/owned-locations";
+export const UPDATE_CITY_DETAILS = "api/map/city-details";
+export const MAP_ATTACK = "api/map/attack";

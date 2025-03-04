@@ -3,9 +3,10 @@ import { useUserResources } from "../../context/UserResourcesContext";
 import { useMutation } from "@tanstack/react-query";
 import { recruitmentService } from "../../api/recruitment/recruitment.service";
 import { Unit } from "../../types/userResources.type";
+import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 
 export const useRecruitment = () => {
-    const [amount, setAmount] = useState<number>(0);
+    const [amount, setAmount] = useState<number | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const { userResources, addOrUpdateUserResources } = useUserResources();
@@ -15,10 +16,12 @@ export const useRecruitment = () => {
         mutationFn: async (amount: number) => {
             setError(null);
             setSuccess(null);
-            return recruitmentService.RecruitSoldier(amount);
+            console.log("amount: ", amount);
+            return recruitmentService.recruitSoldier(amount);
         },
         onSuccess: (data) => {
             setSuccess("Recruitment successful");
+            console.log(data);
             const updatedUnits = units.map((unit: Unit) => {
                 if (unit.unit_name.toLowerCase() === "soldier") {
                     return { ...unit, quantity: data.updateSoldiersQuantity };
@@ -43,10 +46,10 @@ export const useRecruitment = () => {
     });
     const handleRecruitment = (event: React.FormEvent) => {
         event.preventDefault();
-        recruitmentMutation.mutate(amount);
+        if (amount !== null) recruitmentMutation.mutate(amount);
     };
-    const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAmount(Number(event.target.value));
+    const handleAmountChange = (event: InputNumberValueChangeEvent) => {
+        setAmount(event.value ?? 0);
     };
     return {
         handleAmountChange,

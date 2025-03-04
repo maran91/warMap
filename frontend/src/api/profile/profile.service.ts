@@ -12,5 +12,6 @@ const updateProfileInformation = async (newProfile: UpdateProfileType) => {
 const updatePassword = async (newPassword: UpdatePasswordType) => {
     console.log("newPassword", newPassword);
     const response = await httpCommon.put(UPDATE_PASSWORD, newPassword);
+    return response.data;
 };
 export const profileService = { updateProfileInformation, updatePassword };

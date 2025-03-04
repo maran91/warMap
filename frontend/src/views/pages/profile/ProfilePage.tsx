@@ -39,8 +39,8 @@ export const ProfilePage: React.FC = () => {
         handlePasswordUpdate,
     } = usePasswordUpdate();
     return (
-        <div className="flex flex-col items-center justify-center text-center md:mx-14 lg:p-16 xl:p-20">
-            <h2 className="text-3xl mb-6">Profile </h2>
+        <div className=" mt-6 flex flex-col items-center justify-center text-center  ">
+            <h2 className="text-3xl mb-6 text-light-gray font-bold">Profile</h2>
             <form onSubmit={handleProfileUpdate} className="w-full max-w-md">
                 <NameInput
                     name={name}
@@ -67,7 +67,7 @@ export const ProfilePage: React.FC = () => {
                 <Button
                     type="submit"
                     label="Change details"
-                    className="p-button bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded w-1/2 text-center"
+                    className="m-3 p-button bg-dark-red-orange text-white rounded-md shadow-md hover:bg-olive-green hover:scale-105 font-bold py-2 px-4 w-1/2 text-center"
                 />
             </form>
             {profileUpdateSuccessMessage && (
@@ -98,7 +98,7 @@ export const ProfilePage: React.FC = () => {
                 <Button
                     type="submit"
                     label="Change password"
-                    className="p-button bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded w-1/2 text-center"
+                    className="p-button bg-dark-red-orange text-white rounded-md shadow-md hover:bg-olive-green hover:scale-105 font-bold py-2 px-4 w-1/2 text-center"
                 />
                 {passwordUpdateSuccessMessage && (
                     <p className="mt-4 text-green-600">

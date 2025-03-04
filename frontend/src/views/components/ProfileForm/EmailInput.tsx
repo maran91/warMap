@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { AuthSignupErrorsType } from "../../../types/auth.type";
+import { SignupResponseError } from "../../../types/auth.type";
 import { InputText } from "primereact/inputtext";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     setEmail: (value: string) => void;
     isEmailValid: boolean;
     setIsEmailValid: (value: boolean) => void;
-    errors: AuthSignupErrorsType;
+    errors: SignupResponseError;
 }
 
 export const EmailInput: React.FC<Props> = ({

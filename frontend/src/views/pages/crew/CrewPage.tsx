@@ -1,9 +1,11 @@
-import { AdminLayout } from "../../layout/AdminLayout";
+import React from "react";
 
 export const CrewPage = () => {
     return (
         <>
-                <h2>Jõugu leht</h2>
+            <h1 className="text-center text-3xl mt-20 text-light-gray font-bold">
+                In development...
+            </h1>{" "}
         </>
     );
 };

@@ -37,7 +37,7 @@ class ResourceType extends Model
 
     ];
 
-    public function userResource(): HasMany
+    public function userResources(): HasMany
     {
         return $this->hasMany(UserResource::class, 'resource_type_id');
     }

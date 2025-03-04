@@ -1,16 +1,17 @@
 import React, { FC } from "react";
-import './App.css';
+import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./views/pages/authentication/LoginPage";
 import SignupPage from "./views/pages/authentication/SignupPage";
 import { HomePage } from "./views/pages/home/HomePage";
 import { DiscoverPage } from "./views/pages/resources/DiscoverPage";
-import { WarPage } from "./views/pages/map/WarPage";
+import { Map } from "./views/pages/map/Map";
 import { RecruitmentPage } from "./views/pages/recruitment/RecruitmentPage";
 import { CrewPage } from "./views/pages/crew/CrewPage";
 import { ProfilePage } from "./views/pages/profile/ProfilePage";
 import { AppProviders } from "./context/AppProviders";
 import ProtectedRoute from "./views/components/ProtectedRoute/ProtectedRoute";
+import { OwnedProvinces } from "./views/pages/owned_provinces/OwnedProvinces";
 
 const App: FC = () => {
     return (
@@ -22,12 +23,22 @@ const App: FC = () => {
                 <Route path="*" element={<LoginPage />} />
 
                 <Route element={<ProtectedRoute />}>
-                        <Route path="/home" element={<HomePage />} />
-                        <Route path="/majandus/avasta" element={<DiscoverPage />} />
-                        <Route path="/majandus/kamp" element={<CrewPage />} />
-                        <Route path="/sojandus/varbamine" element={<RecruitmentPage />} />
-                        <Route path="/sojandus/kaart" element={<WarPage />} />
-                        <Route path="/seaded/profiil" element={<ProfilePage />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route
+                        path="/economy/discover"
+                        element={<DiscoverPage />}
+                    />
+                    <Route path="/economy/crew" element={<CrewPage />} />
+                    <Route
+                        path="/warfare/recruitment"
+                        element={<RecruitmentPage />}
+                    />
+                    <Route path="/warfare/map" element={<Map />} />
+                    <Route
+                        path="/warfare/provinces"
+                        element={<OwnedProvinces />}
+                    />
+                    <Route path="/settings/profile" element={<ProfilePage />} />
                 </Route>
             </Routes>
         </AppProviders>

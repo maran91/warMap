@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import {
-    AuthSignupErrorsType,
-    UpdatePasswordType,
-} from "../../types/auth.type";
+import { SignupResponseError, UpdatePasswordType } from "../../types/auth.type";
 import { profileService } from "../../api/profile/profile.service";
 
 export const usePasswordUpdate = () => {
     // Validation state
     const [passwordUpdateErrors, setPasswordUpdateErrors] =
-        useState<AuthSignupErrorsType>({});
+        useState<SignupResponseError>({});
     const [passwordUpdateSuccessMessage, setPasswordUpdateSuccessMessage] =
-        useState<string>("");
+        useState<string | null>(null);
 
     // Form state
     const [currentPassword, setCurrentPassword] = useState<string>("");
@@ -21,18 +18,18 @@ export const usePasswordUpdate = () => {
 
     //API mutation
     const { mutate: updatePassword } = useMutation({
-        mutationFn: (updatedPassword: UpdatePasswordType) =>
-            profileService.updatePassword(updatedPassword),
-        onSuccess: () => {
-            setPasswordUpdateSuccessMessage("Password updated successfully.");
+        mutationFn: (updatePassword: UpdatePasswordType) =>
+            profileService.updatePassword(updatePassword),
+        onSuccess: (data) => {
+            setPasswordUpdateSuccessMessage(data.message);
             setPasswordUpdateErrors({});
             setCurrentPassword("");
             setNewPassword("");
             setNewPasswordConfirmation("");
         },
-        onError: (error: AuthSignupErrorsType) => {
+        onError: (error: SignupResponseError) => {
             setPasswordUpdateErrors(error);
-            setPasswordUpdateSuccessMessage("");
+            setPasswordUpdateSuccessMessage(null);
         },
     });
     const handlePasswordUpdate = (e: React.FormEvent<HTMLFormElement>) => {

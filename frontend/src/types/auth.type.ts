@@ -14,11 +14,11 @@ export type AuthContextType = {
     login: (user: User, token: string) => void;
     logout: () => void;
 };
-export type AuthSignupErrorsType = {
+export type SignupResponseError = {
     message?: string[];
-    errors?: AuthSignupFieldErrorsType;
+    errors?: SignupFieldErrorDetails;
 };
-export type AuthSignupFieldErrorsType = {
+export type SignupFieldErrorDetails = {
     name?: string[];
     email?: string[];
     username?: string[];

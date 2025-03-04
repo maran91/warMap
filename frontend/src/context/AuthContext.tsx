@@ -33,6 +33,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
     const login = (user: User, token: string) => {
         setUser(user);
+        localStorage.setItem("timeLeft", JSON.stringify(0));
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("authToken", token);
     };
@@ -42,6 +43,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         localStorage.removeItem("authToken");
         localStorage.removeItem("user");
     };
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>
