@@ -4,30 +4,30 @@ export type CityStat = {
     address: number;
     governor: string;
 };
-export type OwnedCity = {
+export type OwnedProvince = {
     id: number;
     name: string;
     soldierCount: number;
     governor: string;
 };
 
-export type CityDetails = {
+export type ProvinceDetails = {
     city_id: number;
     new_name: string;
 };
-export type OwnedCitiesResponseError = {
+export type OwnedProvincesResponseError = {
     message?: string[];
-    errors?: CityFieldErrorDetails;
+    errors?: ProvinceFieldErrorDetails;
 };
-export type CityFieldErrorDetails = {
+export type ProvinceFieldErrorDetails = {
     new_name?: string[];
 };
-export type AttackCityResponse = {
+export type AttackProvinceResponse = {
     message?: string;
     error?: string;
     user_soldiers?: number;
     city?: string;
-    soldiers_in_city?: number;
+    soldiers_in_province?: number;
     governor?: string;
 };
 export type Attack = {

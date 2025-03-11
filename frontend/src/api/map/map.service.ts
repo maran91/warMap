@@ -5,7 +5,7 @@ import {
     OWNED_LOCATIONS,
     UPDATE_CITY_DETAILS,
 } from "../api-routes";
-import { Attack, CityDetails } from "../../types/map.type";
+import { Attack, ProvinceDetails } from "../../types/map.type";
 
 const getAllCities = async () => {
     const response = await httpCommon.get(MAP);
@@ -15,7 +15,7 @@ const getOwnedCities = async () => {
     const response = await httpCommon.get(OWNED_LOCATIONS);
     return response.data;
 };
-const updateCityDetails = async (cityDetails: CityDetails) => {
+const updateCityDetails = async (cityDetails: ProvinceDetails) => {
     const response = await httpCommon.put(UPDATE_CITY_DETAILS, cityDetails);
     return response.data;
 };

@@ -1,22 +1,25 @@
 import { useMutation } from "@tanstack/react-query";
-import { CityDetails, OwnedCitiesResponseError } from "../../types/map.type";
+import {
+    OwnedProvincesResponseError,
+    ProvinceDetails,
+} from "../../types/map.type";
 import React, { useState } from "react";
 import { mapService } from "../../api/map/map.service";
 
 interface UseCityDetailsUpdateProps {
-    initialCityId: number;
+    initialProvinceId: number;
     onSuccess: () => void;
 }
 
-export const useCityDetailsUpdate = ({
-    initialCityId,
+export const useProvinceDetailsUpdate = ({
+    initialProvinceId,
     onSuccess,
 }: UseCityDetailsUpdateProps) => {
     const [newName, setNewName] = useState<string>("");
-    const [errors, setErrors] = useState<OwnedCitiesResponseError>({});
+    const [errors, setErrors] = useState<OwnedProvincesResponseError>({});
     const [success, setSuccess] = useState<string | null>(null);
     const { mutate } = useMutation({
-        mutationFn: async (cityDetails: CityDetails) => {
+        mutationFn: async (cityDetails: ProvinceDetails) => {
             console.log(cityDetails);
             return mapService.updateCityDetails(cityDetails);
         },
@@ -25,7 +28,7 @@ export const useCityDetailsUpdate = ({
             setErrors({});
             onSuccess();
         },
-        onError: (error: OwnedCitiesResponseError) => {
+        onError: (error: OwnedProvincesResponseError) => {
             console.log(error);
             setErrors(error);
             setSuccess(null);
@@ -33,8 +36,8 @@ export const useCityDetailsUpdate = ({
     });
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const cityDetails: CityDetails = {
-            city_id: initialCityId,
+        const cityDetails: ProvinceDetails = {
+            city_id: initialProvinceId,
             new_name: newName,
         };
         mutate(cityDetails);

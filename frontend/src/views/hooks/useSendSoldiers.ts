@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { mapService } from "../../api/map/map.service";
-import { Attack, AttackCityResponse } from "../../types/map.type";
+import { Attack, AttackProvinceResponse } from "../../types/map.type";
 
 interface UseSendSoldiersProps {
     id: number;
@@ -10,7 +10,7 @@ interface UseSendSoldiersProps {
 
 export const useSendSoldiers = ({ id }: UseSendSoldiersProps) => {
     const [soldiersAmount, setSoldiersAmount] = useState<number>(0);
-    const [errors, setErrors] = useState<AttackCityResponse>({});
+    const [errors, setErrors] = useState<AttackProvinceResponse>({});
     const [successMessage, setsuccessMessage] = useState<string>("");
     const queryClient = useQueryClient();
 
@@ -31,7 +31,7 @@ export const useSendSoldiers = ({ id }: UseSendSoldiersProps) => {
 
             //onSuccess();
         },
-        onError: (error: AttackCityResponse) => {
+        onError: (error: AttackProvinceResponse) => {
             console.log(error);
             console.log("invalidateQueries PLACEHOLDER"); // <--- ADD PLACEHOLDER LOG
 

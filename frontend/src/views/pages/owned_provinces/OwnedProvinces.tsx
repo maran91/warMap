@@ -1,15 +1,15 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { mapService } from "../../../api/map/map.service";
 import { Dialog } from "primereact/dialog";
-import { OwnedCity } from "../../../types/map.type";
-import { CityDetailsForm } from "./Form/CityDetailsForm";
+import { OwnedProvince } from "../../../types/map.type";
+import { ProvinceDetailsForm } from "./Form/ProvinceDetailsForm";
 
 interface DataTableClickEvent {
     originalEvent: React.MouseEvent<HTMLTableRowElement, MouseEvent>;
-    data: OwnedCity;
+    data: OwnedProvince;
     index: number;
     type: string;
 }
@@ -17,99 +17,97 @@ interface DataTableClickEvent {
 const ownedCitiesQueryKey = "ownedCities";
 
 export const OwnedProvinces = () => {
-    const [cities, setCities] = useState<OwnedCity[]>([]);
-    const [selectedCity, setSelectedCity] = useState<OwnedCity | null>(null);
-    const [visible, setVisible] = useState(false);
+    const [selectedProvince, setSelectedProvince] =
+        useState<OwnedProvince | null>(null);
+    const [dialogVisible, setdialogVisible] = useState(false);
 
-    const { refetch, isLoading, error, data } = useQuery({
+    const {
+        data: cities = [],
+        refetch,
+        isLoading,
+        error,
+    } = useQuery({
         queryKey: [ownedCitiesQueryKey],
         queryFn: () => mapService.getOwnedCities(),
     });
-    useEffect(() => {
-        if (data) {
-            setCities(data);
-            console.log("Owned cities data fetched:", data);
-        }
-    }, [data]);
 
-    useEffect(() => {
-        if (error) {
-            console.error("Error fetching owned cities:", error);
-        }
-    }, [error]);
-    const onRowClick = (event: DataTableClickEvent) => {
-        setSelectedCity(event.data);
-        setVisible(true);
+    const handleRowClick = (event: DataTableClickEvent) => {
+        setSelectedProvince(event.data);
+        setdialogVisible(true);
     };
-    const hideDialog = () => {
-        setVisible(false);
-        setSelectedCity(null);
+    const handleDialogClose = () => {
+        setdialogVisible(false);
+        setSelectedProvince(null);
     };
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-32">
+                <h1>Loading</h1>
+            </div>
+        );
+    }
+    if (error) {
+        return (
+            <div className="p-4 bg-red-100 text-red-700 rounded-lg border border-red-200">
+                Error loading provinces: {(error as Error).message}
+            </div>
+        );
+    }
+
     const cityDialogFooter = (
         <>
-            {selectedCity && (
-                <CityDetailsForm
-                    cityName={selectedCity.name}
-                    initialCityId={selectedCity?.id}
+            {selectedProvince && (
+                <ProvinceDetailsForm
+                    provinceName={selectedProvince.name}
+                    initialProvinceId={selectedProvince?.id}
                     onCityNameUpdated={refetch}
                 />
             )}
-            <button
-                className="text-white bg-blue-500 hover:bg-blue-700 rounded-md px-4 py-2"
-                onClick={hideDialog}
-            >
-                Close
-            </button>
         </>
     );
-    console.log(cities);
     return (
-        <div className="card p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="mt-10 rounded-lg border text-light-gray bg-midnight-blue shadow-sm">
             <DataTable
                 value={cities}
-                className="text-center text-xl border border-dark-red-orange"
-                onRowClick={onRowClick}
+                dataKey="id"
+                loading={isLoading}
+                emptyMessage="No provinces under your control"
+                onRowClick={handleRowClick}
                 rowClassName={() => "cursor-pointer hover:bg-secondary-100"}
-                header="My Provinces"
-                stripedRows
+                className="text-lg"
+                header={
+                    <div className="  text-center px-4 py-3 rounded-t-lg bg-midnight-blue border-b">
+                        <h3 className="font-semibold text-light-gray text-xl">
+                            My Provinces
+                        </h3>
+                    </div>
+                }
             >
                 <Column
-                    className="text-center"
                     field="name"
                     header="Name"
-                    headerClassName="text-deep-red !text-center"
+                    sortable
+                    headerClassName="text-light-gray px-4 py-3"
+                    bodyClassName="px-4 py-2"
                 ></Column>
                 <Column
                     field="soldier_count"
                     header="Soldiers deployed"
-                    headerClassName="!text-center  ml-10"
-                    className=" text-deep-red"
+                    sortable
+                    headerClassName="text-light-gray px-4 py-3"
+                    bodyClassName="px-4 py-2"
                 ></Column>
             </DataTable>
             <Dialog
-                visible={visible}
-                header={selectedCity ? selectedCity.name : "City Details"}
-                onHide={hideDialog}
+                visible={dialogVisible}
+                header={selectedProvince?.name || "Province Details"}
+                onHide={handleDialogClose}
                 footer={cityDialogFooter}
-                className="w-1/2 shadow-lg rounded-lg bg-white"
-                headerClassName="bg-gray-200 font-bold border-b border-gray-200"
+                className="w-full max-w-xl bg-secondary-100 rounded-lg overflow-hidden"
+                dismissableMask
+                headerClassName="pl-5 text-xl bg-muted-gold font-bold border-gray-200 rounded-t-lg [&_.p-dialog-header-icon]:text-xl [&_.p-dialog-header-icon]:w-10 [&_.p-dialog-header-icon]:h-10 [&_.p-dialog-header-icon]:hover:bg-yellow "
                 contentClassName="p-6"
-            >
-                {selectedCity && (
-                    <div className="leading-relaxed">
-                        <p>
-                            <strong className="font-semibold">Name:</strong>{" "}
-                            {selectedCity.name}
-                        </p>
-                        <p>
-                            <strong className="font-semibold">
-                                Soldiers Deployed:
-                            </strong>{" "}
-                            {selectedCity.soldierCount}
-                        </p>
-                    </div>
-                )}
-            </Dialog>
+            ></Dialog>
         </div>
     );
 };
