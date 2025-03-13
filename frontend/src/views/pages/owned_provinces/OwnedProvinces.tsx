@@ -103,9 +103,9 @@ export const OwnedProvinces = () => {
                 header={selectedProvince?.name || "Province Details"}
                 onHide={handleDialogClose}
                 footer={cityDialogFooter}
-                className="w-full max-w-xl bg-secondary-100 rounded-lg overflow-hidden"
+                className="w-full max-w-xl bg-charcoal-black rounded-lg overflow-hidden"
                 dismissableMask
-                headerClassName="pl-5 text-xl bg-muted-gold font-bold border-gray-200 rounded-t-lg [&_.p-dialog-header-icon]:text-xl [&_.p-dialog-header-icon]:w-10 [&_.p-dialog-header-icon]:h-10 [&_.p-dialog-header-icon]:hover:bg-yellow "
+                headerClassName="overflow-hidden pl-5 text-xl text-light-gray bg-dark-green font-bold border-gray-200 rounded-t-lg [&_.p-dialog-header-icon]:text-xl [&_.p-dialog-header-icon]:w-10 [&_.p-dialog-header-icon]:h-10 [&_.p-dialog-header-icon]:bg-dark-red-orange [&_.p-dialog-header-icon]:hover:bg-olive-green"
                 contentClassName="p-6"
             ></Dialog>
         </div>

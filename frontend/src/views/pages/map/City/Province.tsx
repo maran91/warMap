@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CityStats } from "./CityStats";
-import { CityFormModal } from "./CityForm/CityFormModal";
+import { ProvinceFormModal } from "./CityForm/ProvinceFormModal";
 
 interface Props {
     name: string;
@@ -9,7 +9,7 @@ interface Props {
     onCityUpdated: () => void;
 }
 
-export const City: React.FC<Props> = ({
+export const Province: React.FC<Props> = ({
     name,
     governor,
     id,
@@ -61,7 +61,7 @@ export const City: React.FC<Props> = ({
         `}
                 />
             </div>
-            <CityFormModal
+            <ProvinceFormModal
                 isModalOpen={isModalOpen}
                 closeModal={closeModal}
                 openModal={openModal}

@@ -1,5 +1,5 @@
 import React from "react";
-import { CitySoldiersInput } from "./CitySoldiersInput";
+import { ProvinceSoldiersInput } from "./ProvinceSoldiersInput";
 import { useSendSoldiers } from "../../../../hooks/useSendSoldiers";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
     onCityUpdated: () => void;
 }
 
-export const CityFormModal: React.FC<Props> = ({
+export const ProvinceFormModal: React.FC<Props> = ({
     isModalOpen,
     openModal,
     closeModal,
@@ -37,14 +37,13 @@ export const CityFormModal: React.FC<Props> = ({
 
     return (
         <>
-            {" "}
             {isModalOpen && (
                 <div
                     className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50"
                     onClick={closeModal}
                 >
                     <div
-                        className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full"
+                        className="bg-charcoal-black p-6 rounded-lg shadow-lg max-w-sm w-full text-light-gray"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h2 className="text-xl mb-5 text-center">
@@ -52,28 +51,27 @@ export const CityFormModal: React.FC<Props> = ({
                         </h2>
                         <p>
                             Province governor: &nbsp;
-                            {governor ? governor : " City has no governor."}
+                            {governor ? governor : " Province has no governor."}
                         </p>
 
-                        {/*Send soldiers to the city*/}
                         <form onSubmit={handleSubmit}>
-                            <CitySoldiersInput
+                            <ProvinceSoldiersInput
                                 soldierCount={soldiersAmount}
                                 setSoldierCount={setSoldiersAmount}
                                 errors={errors}
                             />
-                            <p>Send soldiers to city</p>
+                            <p>Send soldiers to province</p>
+                            <p className="text-xl text-green-600 font-bold">
+                                {successMessage}
+                            </p>
+                            <p className="text-xl text-red-600 font-bold">
+                                {errors}
+                            </p>
                             <button
                                 type="submit"
-                                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md"
+                                className="mt-4 bg-dark-red-orange text-white px-4 py-2 rounded-md hover:scale-110 hover:bg-olive-green"
                             >
                                 Send
-                            </button>
-                            <button
-                                className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md"
-                                onClick={closeModal} // Close modal on click
-                            >
-                                Close
                             </button>
                         </form>
                     </div>

@@ -7,7 +7,7 @@ interface Props {
     errors: any;
 }
 
-export const CitySoldiersInput: React.FC<Props> = ({
+export const ProvinceSoldiersInput: React.FC<Props> = ({
     soldierCount,
     setSoldierCount,
     errors,
@@ -17,7 +17,7 @@ export const CitySoldiersInput: React.FC<Props> = ({
         setSoldierCount(Number(e.target.value));
     };
     return (
-        <div className="field mb-4">
+        <div className="field mb-4 text-charcoal-black">
             <InputText
                 id="soldierCount"
                 type="number"

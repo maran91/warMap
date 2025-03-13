@@ -26,7 +26,7 @@ export const ProvinceDetailsForm: React.FC<Props> = ({
         <>
             <form
                 onSubmit={handleSubmit}
-                className="m-1 bg-secondary-100 rounded-lg "
+                className="m-2 bg-charcoal-black rounded-lg "
             >
                 <ProvinceNameInput
                     provinceName={newName}
@@ -36,7 +36,7 @@ export const ProvinceDetailsForm: React.FC<Props> = ({
                 <Button
                     type="submit"
                     label="Change name"
-                    className=" p-button bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
+                    className=" p-button bg-dark-red-orange hover:scale-105 hover:bg-olive-green text-white font-bold py-2 px-4 rounded"
                 />
             </form>
         </>

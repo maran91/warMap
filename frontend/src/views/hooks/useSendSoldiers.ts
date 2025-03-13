@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { mapService } from "../../api/map/map.service";
-import { Attack, AttackProvinceResponse } from "../../types/map.type";
+import { Attack } from "../../types/map.type";
+import { useUpdatedUserResources } from "./useUpdatedUserResources";
 
 interface UseSendSoldiersProps {
     id: number;
@@ -10,9 +11,10 @@ interface UseSendSoldiersProps {
 
 export const useSendSoldiers = ({ id }: UseSendSoldiersProps) => {
     const [soldiersAmount, setSoldiersAmount] = useState<number>(0);
-    const [errors, setErrors] = useState<AttackProvinceResponse>({});
+    const [errors, setErrors] = useState<string>("");
     const [successMessage, setsuccessMessage] = useState<string>("");
     const queryClient = useQueryClient();
+    const { updateUserResources } = useUpdatedUserResources();
 
     const { mutate } = useMutation({
         mutationFn: async (attackData: Attack) => {
@@ -25,17 +27,16 @@ export const useSendSoldiers = ({ id }: UseSendSoldiersProps) => {
 
         onSuccess: async (data) => {
             setsuccessMessage(data.message);
-            setErrors({});
+            setErrors("");
             await queryClient.invalidateQueries({ queryKey: ["mapData"] });
             console.log("useSendSoldiers: onSuccess CALLED", data);
-
-            //onSuccess();
+            updateUserResources({
+                unitName: "soldier",
+                unitQuantity: data.soldiers,
+            });
         },
-        onError: (error: AttackProvinceResponse) => {
-            console.log(error);
-            console.log("invalidateQueries PLACEHOLDER"); // <--- ADD PLACEHOLDER LOG
-
-            setErrors(error);
+        onError: (error: any) => {
+            setErrors(error.response.data.error);
             setsuccessMessage("");
         },
     });
@@ -45,7 +46,6 @@ export const useSendSoldiers = ({ id }: UseSendSoldiersProps) => {
             city_id: id,
             soldiers_amount: soldiersAmount,
         };
-        console.log(attackData);
         mutate(attackData);
     };
     return {

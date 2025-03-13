@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { mapService } from "../../../api/map/map.service";
 import { CityStat } from "../../../types/map.type";
-import { City } from "./City/City";
+import { Province } from "./City/Province";
 
 export const Map = () => {
     const mapDataQueryKey = "mapData";
@@ -33,7 +33,7 @@ export const Map = () => {
     return (
         <div className="grid grid-cols-10 grid-rows-10 gap-1">
             {cities?.map((city, index) => (
-                <City
+                <Province
                     key={city.address || index}
                     {...city}
                     onCityUpdated={refetch}

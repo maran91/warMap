@@ -24,7 +24,6 @@ httpCommon.interceptors.request.use(
 );
 httpCommon.interceptors.response.use(
     (response) => {
-
         return response;
     },
     (error) => {
@@ -52,7 +51,7 @@ httpCommon.interceptors.response.use(
                         error.response.data,
                     );
                 }
-                return Promise.reject(message);
+                return Promise.reject(error);
         }
     },
 );
